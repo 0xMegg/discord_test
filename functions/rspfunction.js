@@ -1,4 +1,4 @@
-async function pingfunction(interaction) {
+async function rspfunction(interaction) {
   const choice = interaction.options.getInteger("choice");
   const strongTo = {
     1: 2,
@@ -19,4 +19,4 @@ async function pingfunction(interaction) {
   await interaction.reply(message);
 }
 
-module.exports = pingfunction;
+module.exports = rspfunction;
