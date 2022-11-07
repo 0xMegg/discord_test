@@ -18,6 +18,7 @@
   "homepage": "https://github.com/natreeum/discordbot_boilerplate#readme",
   "dependencies": {
     "@discordjs/rest": "^1.0.1",
+    "@prisma/client": "^4.5.0",
     "@types/node": "^18.11.9",
     "D": "^1.0.0",
     "discord.js": "^14.1.2",
