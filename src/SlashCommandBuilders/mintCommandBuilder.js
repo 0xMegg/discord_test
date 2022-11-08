@@ -6,11 +6,5 @@ const mintCommandBuilder = new SlashCommandBuilder()
   .addIntegerOption((option) =>
     option.setName("amount").setDescription("how much?").setRequired(true)
   );
-// .addIntegerOption((option) =>
-//   option
-//     .setName("amount")
-//     .setDescription("how much?")
-//     .addChoices({ value: 1 })
-// );
 
 module.exports = mintCommandBuilder;
