@@ -1,4 +1,7 @@
 async function showfunction(interaction) {
+  if (!interaction.isCommand()) return;
+  if (interaction.guildId !== guildId) return;
+
   const choice = interaction.options.getInteger("member");
   console.log(choice);
 
