@@ -1,18 +1,41 @@
+const data = require("../../data/point.json");
+const { guildId } = require("../config");
+
 async function showfunction(interaction) {
   if (!interaction.isCommand()) return;
   if (interaction.guildId !== guildId) return;
 
-  const choice = interaction.options.getInteger("member");
-  console.log(choice);
+  let targetId;
+  const userId = interaction.user.id;
 
-  let message = "";
-  if (choice) {
-    message = `<@${interaction.user.id}> win`;
-  } else {
-    message = `<@${interaction.user.id}> loose`;
+  console.log(targetId);
+
+  await interaction.deferReply("Plz wait...!");
+
+  try {
+    let currentPoint;
+    let currentId;
+    if (interaction.options.getUser("user")) {
+      targetId = interaction.options.getUser("user").id;
+      data.filter((e) => {
+        if (e.user === targetId) {
+          currentPoint = e.point01;
+          currentId = e.user;
+        }
+      });
+    } else {
+      data.filter((e) => {
+        if (e.user === userId) {
+          currentPoint = e.point01;
+          currentId = e.user;
+        }
+      });
+    }
+    await interaction.editReply(`<@${currentId}> has ${currentPoint} mimix!`);
+  } catch (error) {
+    console.log(error);
+    await interaction.editReply(error.message);
   }
-
-  await interaction.reply(message);
 }
 
 module.exports = showfunction;

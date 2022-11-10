@@ -8,10 +8,12 @@ async function mintfunction(interaction) {
 
   const mint = interaction.options.getInteger("amount");
 
+  await interaction.deferReply("Plz wait...!");
+
   try {
     let mintedpoint;
     let isExist = false;
-    
+
     data.filter((e) => {
       if (e.user === interaction.user.id) {
         isExist = true;
@@ -36,12 +38,12 @@ async function mintfunction(interaction) {
 
     const mintedData = JSON.stringify(data);
     fs.writeFileSync("data/point.json", mintedData);
-    await interaction.reply(
+    await interaction.editReply(
       `<@${interaction.user.id}> mint ${mint} mimix\n<@${interaction.user.id}> have ${mintedpoint} mimix`
     );
   } catch (e) {
     console.log(e.message);
-    await interaction.reply(e.message);
+    await interaction.editReply(e.message);
   }
 }
 

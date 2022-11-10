@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, Guild } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
 
 const mintCommandBuilder = new SlashCommandBuilder()
   .setName("mint")

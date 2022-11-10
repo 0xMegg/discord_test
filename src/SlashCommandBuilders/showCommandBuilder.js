@@ -1,13 +1,17 @@
-const { SlashCommandBuilder, Guild } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
 
 const showCommandBuilder = new SlashCommandBuilder()
   .setName("show")
   .setDescription("show")
-  .addIntegerOption((option) =>
-    option
-      .setName("member")
-      .setDescription("who you want?")
-      .addChoices({ name: "1", value: 1 })
+  .addUserOption((option) =>
+    option.setName("user").setDescription("Choice user to check")
   );
+
+// const showCommandBuilder = new SlashCommandBuilder()
+//   .setName("show")
+//   .setDescription("show a point")
+//   .addUserOption((option) =>
+//     option.setName("user").setDescription("how much?").setRequired(true)
+//   );
 
 module.exports = showCommandBuilder;
