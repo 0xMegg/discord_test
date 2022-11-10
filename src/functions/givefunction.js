@@ -1,15 +1,40 @@
+const { guildId } = require("../config");
+const data = require("../../data/point.json");
+const fs = require("fs");
+
 async function givefunction(interaction) {
-  const give = interaction.options.getInteger("amount");
-  console.log(give);
+  if (!interaction.isCommand()) return;
+  if (interaction.guildId !== guildId) return;
 
-  let message = `${give}`;
-  // if (choice) {
-  //   message = `<@${interaction.user.id}> win`;
-  // } else {
-  //   message = `<@${interaction.user.id}> loose`;
-  // }
+  const amount = interaction.options.getInteger("amount");
+  const giver = interaction.user;
+  const taker = interaction.option.getUser("user");
 
-  await interaction.reply(message);
+  await interaction.deferReply("Plz wait...!");
+
+  try {
+    let point;
+    data.filter((e) => {
+      if (e.user === user.id) {
+        point = e.point01;
+      }
+    });
+
+    if (point < amount) {
+      await interaction.editReply(
+        `Not enough Mimix. You have only ${point}Mimix`
+      );
+      return;
+    }
+
+    giver.point01 -= amount;
+    taker.point01 += amount;
+
+    await interaction.editReply(`${point} is transfer ${giver} to ${taker}`);
+  } catch (e) {
+    console.log(e);
+    await interaction.editReply(e.message);
+  }
 }
 
 module.exports = givefunction;
