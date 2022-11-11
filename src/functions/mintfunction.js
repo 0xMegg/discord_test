@@ -36,7 +36,7 @@ async function mintfunction(interaction) {
       }
     });
 
-    const mintedData = JSON.stringify(data);
+    const mintedData = JSON.stringify(data, null, 4);
     fs.writeFileSync("data/point.json", mintedData);
     await interaction.editReply(
       `<@${interaction.user.id}> mint ${mint} mimix\n<@${interaction.user.id}> have ${mintedpoint} mimix`
