@@ -8,8 +8,6 @@ async function showfunction(interaction) {
   let targetId;
   const userId = interaction.user.id;
 
-  console.log(targetId);
-
   await interaction.deferReply("Plz wait...!");
 
   try {
