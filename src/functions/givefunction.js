@@ -8,14 +8,14 @@ async function givefunction(interaction) {
 
   const amount = interaction.options.getInteger("amount");
   const giver = interaction.user;
-  const taker = interaction.option.getUser("user");
+  const taker = interaction.options.getUser("user");
 
   await interaction.deferReply("Plz wait...!");
 
   try {
     let point;
     data.filter((e) => {
-      if (e.user === user.id) {
+      if (e.user === giver.id) {
         point = e.point01;
       }
     });
@@ -27,10 +27,28 @@ async function givefunction(interaction) {
       return;
     }
 
-    giver.point01 -= amount;
-    taker.point01 += amount;
+    let giverCurrent;
+    let takerCurrent;
 
-    await interaction.editReply(`${point} is transfer ${giver} to ${taker}`);
+    data.filter((e) => {
+      if (e.user === giver.id) {
+        e.point01 -= amount;
+        giverCurrent = e.point01;
+      }
+    });
+    data.filter((e) => {
+      if (e.user === taker.id) {
+        e.point01 += amount;
+        takerCurrent = e.point01;
+      }
+    });
+
+    const givedData = JSON.stringify(data, null, 4);
+    fs.writeFileSync("data/point.json", givedData);
+
+    await interaction.editReply(
+      `${amount} is transfer ${giver} to ${taker}\nNow ${giver} have ${giverCurrent}, ${taker} have ${takerCurrent}`
+    );
   } catch (e) {
     console.log(e);
     await interaction.editReply(e.message);
