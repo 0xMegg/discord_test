@@ -17,3 +17,4 @@ DISCORD_TOKEN = discord bot token
 `npm run s` for start
 
 1202
+1203
